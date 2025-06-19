@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta property="og:image" content="https://your-portfolio-domain.com/images/portfolio-preview.png">
+    <meta property="og:title" content="Zwivhuya Vision Madzivhandila | Full Stack Developer & Frontend Specialist">
+    <meta property="og:description" content="Explore the portfolio of Zwivhuya Vision Madzivhandila — passionate about building elegant, functional, and user-focused web & mobile applications.">
+    <meta property="og:url" content="https://your-portfolio-domain.com/index.html">
+    <link rel="icon" href="images/zee logo.jpg" type="image/png">
+
+    <title>Zwivhuya Vision Madzivhandila | Full Stack Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="overflow: hidden;" >
+    <nav>
+        <div class="nav-container">
+            <a href="Home.html" class="logo">Zwivhuya Madzivhandila</a>
+            <ul class="nav-links">
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Skills.html">Skills</a></li>
+                <li><a href="Project.html">Projects</a></li>
+                <li><a href="Contact.html">Social</a></li>
+                <li><a href="Cv.html">CV & Certificates</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" title="Open mobile menu" aria-label="Open mobile menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="particles" id="particles"></div>
+            <div class="glow"></div>
+            <div class="hero-content">
+                <h1>Zwivhuya Vision Madzivhandila</h1>
+                <p class="subtitle">Junior Full Stack Developer</p>
+                <p class="description">
+                    Motivated Junior Full Stack Developer with a strong preference for frontend development. 
+                    Skilled in crafting responsive, user-friendly web and mobile applications using modern 
+                    frameworks such as React.js and Kotlin.
+                </p>
+                <div class="cta-buttons">
+                    <a href="Project.html" class="btn btn-primary">View My Work</a>
+                    <a href="Contact.html" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuBtn = document.querySelector('.mobile-menu-btn i');
+            
+            navLinks.classList.toggle('active');
+            menuBtn.classList.toggle('fa-bars');
+            menuBtn.classList.toggle('fa-times');
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        window.addEventListener('load', createParticles);
+
+        // Ripple effect
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                0% { transform: scale(0); opacity: 1; }
+                100% { transform: scale(4); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
