@@ -187,21 +187,7 @@
     </main>
 
     <script>
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const menuBtn = document.querySelector('.mobile-menu-btn i');
-            
-            navLinks.classList.toggle('active');
-            
-            if (navLinks.classList.contains('active')) {
-                menuBtn.classList.replace('fa-bars', 'fa-times');
-            } else {
-                menuBtn.classList.replace('fa-times', 'fa-bars');
-            }
-        }
-
-        // Animate elements on scroll
+       // Animate elements on scroll
         function animateOnScroll() {
             const elements = document.querySelectorAll('.animate-on-scroll');
             
@@ -219,43 +205,77 @@
         window.addEventListener('scroll', animateOnScroll);
         window.addEventListener('load', animateOnScroll);
 
-        // Add interactive effects to project cards
-        document.addEventListener('DOMContentLoaded', function() {
-            const projectCards = document.querySelectorAll('.project-card');
-            
-            projectCards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-15px) scale(1.02)';
-                    this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.3)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                    this.style.boxShadow = 'none';
-                });
-            });
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
 
-            // Add click effects to tech tags
-            const techTags = document.querySelectorAll('.tech-tag');
-            techTags.forEach(tag => {
-                tag.addEventListener('click', function() {
-                    this.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                    }, 200);
-                });
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        window.addEventListener('load', createParticles);
+
+        // Ripple effect for buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
             });
         });
 
-        // Stagger animation for project cards
-        function staggerAnimation() {
-            const cards = document.querySelectorAll('.project-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-            });
-        }
+        // Add ripple animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                0% { transform: scale(0); opacity: 1; }
+                100% { transform: scale(4); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
 
-        window.addEventListener('load', staggerAnimation);
+        // Update active navigation link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 
     <footer class="footer">
