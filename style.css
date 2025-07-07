@@ -368,7 +368,7 @@ nav {
         }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     .nav-links {
         display: none;
         position: absolute;
@@ -403,7 +403,7 @@ nav {
         width: 100%;
         max-width: 300px;
     }
-}
+}*/
 /* Hover Effect for Skill Tags */
 .skill-tag:hover::before {
     left: 100%;
@@ -989,7 +989,7 @@ main {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     .nav-links {
         display: none;
         flex-direction: column;
@@ -1012,7 +1012,7 @@ main {
     .cvp-actions {
         flex-direction: column;
     }
-}
+}*/
 
 
 /* Accessibility */
