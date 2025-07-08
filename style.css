@@ -1531,9 +1531,9 @@ main {
         .stat-item {
             text-align: center;
             padding: 2rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: white;
             border-radius: 15px;
-            color: white;
+            color: #4a5568;
             transition: transform 0.3s ease;
         }
 
